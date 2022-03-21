@@ -1,4 +1,6 @@
 
+import 'package:breathe/components/HomeScreenApp.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'components/app_long_press.dart';
@@ -26,39 +28,46 @@ longPressHandler(val){
       body: Stack(
         children: [
            Container(
-             decoration: BoxDecoration(image: DecorationImage(image: NetworkImage('https://images.unsplash.com/photo-1530092285049-1c42085fd395?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d2hpdGUlMjBmbG93ZXJ8ZW58MHx8MHx8&w=1000&q=80'),fit: BoxFit.cover)),
+             decoration: const BoxDecoration(image: DecorationImage(image: NetworkImage('https://images.unsplash.com/photo-1525166877954-16f07a81119b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1365&q=80'),fit: BoxFit.cover)),
              child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                 children: [
-                     Column(
-                children: [
-                  RichText(
-                    text: TextSpan(
-                        text: '12.00\n',
-                        style: TextStyle(color: Colors.black, fontSize: 45),
-                        children: [
-                          TextSpan(
-                              text: 'calendar dates\n',
-                              style: TextStyle(fontSize: 20)),
-                          TextSpan(
-                              text: 'weather weather where art thou?',
-                              style: TextStyle(fontSize: 20)),
-                        ]),
-                  ),
-                ],
-              ),
-                     SizedBox(
-                height: 30,
-              ),
-                     Column(
+               children: [
+                 SafeArea(
+                   child: Container(height: MediaQuery.of(context).size.height/3,width: MediaQuery.of(context).size.width,
+                   padding: EdgeInsets.only(left: 20,top: 20),
+                     child: Column(
+                         crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
-                            for(int i=0;i<5;i++)
-                                AppLongPress(handler:longPressHandler,
-                                    textWidget: Text('App${i+1}\n',style: TextStyle(fontSize: 35),),),
-                                   ],
-                           ),
+                             Column(
+                        children:  [
+                         Text("12:55",style: TextStyle(fontSize: 47,color: Colors.white,),),
+                         Text("Tue, 22 Mar",style: TextStyle(fontSize: 22,color: Colors.white,),),
+                         Container(width: 105,padding: EdgeInsets.symmetric(vertical: 10),child: Row(
+                           children: [
+                             Row(children: [Icon(CupertinoIcons.cloud_rain,color: Colors.white,size: 16,),Text("  22°  ",style: TextStyle(fontSize: 15,color: Colors.white,))],),
+                              Row(children: [Icon(CupertinoIcons.battery_25,color: Colors.white,size: 16,),Text("  75%",style: TextStyle(fontSize: 15,color: Colors.white,))],),
+                           ],
+                         ))
                         ],
-                    ),
+                      ),
+                             
+                                ],
+                            ),
+                   ),
+                 ),
+               Container(width: MediaQuery.of(context).size.width,
+               padding: EdgeInsets.only(left: 20),
+                 child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                 mainAxisAlignment: MainAxisAlignment.start,
+                               children: const [
+                                 HomeScreenApp("WhatsApp"),
+                                 HomeScreenApp("Youtube"),
+                                 HomeScreenApp("Instagram"),
+                                 HomeScreenApp("Slack")
+                              
+                                         ],
+                                 ),
+               ),],
+             ),
            ),
           
           backdropstate?AppActionOverlay(handler: longPressHandler,):Container(),
