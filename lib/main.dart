@@ -1,8 +1,13 @@
+import 'package:azlistview/azlistview.dart';
+import 'package:breathe/Widgets/apps_list.dart';
 import 'package:breathe/presentation%20layer/routes/routes.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:installed_apps/installed_apps.dart';
 import 'package:status_bar_control/status_bar_control.dart';
+
+List<AZList> items = [];
+bool isLoading = true;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +28,28 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    getApps();
+    super.initState();
+  }
+
+  getApps() async {
+    var item = await InstalledApps.getInstalledApps();
+    items = item
+        .map((e) => AZList(
+            title: e.name.toString(),
+            tag: e.name![0].toString().toUpperCase(),
+            abc: e.packageName.toString()))
+        .toList();
+
+    SuspensionUtil.sortListBySuspensionTag(items);
+    SuspensionUtil.setShowSuspensionStatus(items);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

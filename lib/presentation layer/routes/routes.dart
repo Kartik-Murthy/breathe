@@ -1,4 +1,4 @@
-import 'package:breathe/presentation%20layer/screens/apps_list.dart';
+import 'package:breathe/presentation%20layer/screens/all_apps.dart';
 import 'package:breathe/presentation%20layer/screens/home.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (context) => const Home());
 
       case '/appsList':
-        return MaterialPageRoute(builder: (context) => const AppsList());
+        return MaterialPageRoute(builder: (context) => const AllApps());
 
       default:
         return MaterialPageRoute(builder: (context) => const Home());
