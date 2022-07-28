@@ -1,11 +1,8 @@
-import 'dart:math';
-
-import 'package:breathe/Widgets/apps_list.dart';
-import 'package:breathe/main.dart';
 import 'package:flutter/material.dart';
 import 'package:installed_apps/installed_apps.dart';
 import 'package:intl/intl.dart';
 import 'package:timer_builder/timer_builder.dart';
+import 'package:breathe/main.dart';
 
 class ClockAndCalendar extends StatefulWidget {
   final bool isTimeWidget;
@@ -41,22 +38,22 @@ class _ClockAndCalendarState extends State<ClockAndCalendar> {
         );
       }),
       onTap: () {
-        var hehe;
+        String packageName = '';
         items.any((element) {
-          if (element.abc.contains('clock') && widget.isTimeWidget == true) {
-            hehe = element.abc;
+          if (element.package.contains('clock') &&
+              widget.isTimeWidget == true) {
+            packageName = element.package;
             return true;
-          } else if (element.abc.contains('calendar') &&
+          } else if (element.package.contains('calendar') &&
               widget.isTimeWidget == false) {
-            hehe = element.abc;
+            packageName = element.package;
             return true;
           }
           return false;
         });
         widget.isTimeWidget
-            ? InstalledApps.startApp(hehe)
-            : InstalledApps.startApp(hehe);
-        print(hehe);
+            ? InstalledApps.startApp(packageName)
+            : InstalledApps.startApp(packageName);
       },
     );
   }

@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:installed_apps/installed_apps.dart';
 
 class HomeScreenApps extends StatefulWidget {
-  final String? appName;
-  final bool isEditable;
-  const HomeScreenApps({Key? key, this.appName, required this.isEditable})
-      : super(key: key);
+  const HomeScreenApps({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomeScreenApps> createState() => _HomeScreenAppsState();
 }
 
 class _HomeScreenAppsState extends State<HomeScreenApps> {
+  String? appName;
+  String? packageName;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onLongPress: () {
-        if (widget.isEditable) {}
+      onLongPress: () async {
+        final data =
+            await Navigator.pushNamed(context, '/appsList', arguments: true);
+        setState(() {
+          if (data != null) {
+            appName = data.toString().split(',')[0];
+            packageName = data.toString().split(',')[1];
+            print(packageName);
+          }
+        });
       },
       onTap: () async {
-        if (widget.appName == null) {
+        if (appName == null) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: const Center(
                 child: Text(
@@ -33,10 +43,19 @@ class _HomeScreenAppsState extends State<HomeScreenApps> {
                 vertical: MediaQuery.of(context).size.height / 2 - 25,
                 horizontal: MediaQuery.of(context).size.width / 2 - 90),
           ));
-        } else if (widget.appName != null) {}
+        } else if (appName != null) {
+          InstalledApps.startApp(packageName.toString());
+        }
       },
-      child: Text(widget.appName ?? 'App',
-          style: const TextStyle(fontSize: 32, color: Colors.white)),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 50,
+            child: Text(appName ?? 'App',
+                style: const TextStyle(fontSize: 32, color: Colors.white)),
+          ),
+        ],
+      ),
     );
   }
 }

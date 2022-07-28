@@ -1,18 +1,24 @@
-import 'package:breathe/presentation%20layer/screens/all_apps.dart';
-import 'package:breathe/presentation%20layer/screens/home.dart';
+import 'package:breathe/presentation%20layer/screens/apps_screen.dart';
+import 'package:breathe/presentation%20layer/screens/home_screen.dart';
+import 'package:breathe/presentation%20layer/screens/settings_screen.dart';
 import 'package:flutter/material.dart';
 
 class AppRoutes {
-  Route generatedRoutes(RouteSettings settings) {
+  static Route<dynamic> generatedRoutes(RouteSettings settings) {
+    final args = settings.arguments;
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (context) => const Home());
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
 
       case '/appsList':
-        return MaterialPageRoute(builder: (context) => const AllApps());
+        return MaterialPageRoute(
+            builder: (context) => AppsScreen(argument: args));
+
+      case '/settings':
+        return MaterialPageRoute(builder: (context) => const SettingsScreen());
 
       default:
-        return MaterialPageRoute(builder: (context) => const Home());
+        return MaterialPageRoute(builder: (context) => const HomeScreen());
     }
   }
 }

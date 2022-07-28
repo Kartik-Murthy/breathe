@@ -1,18 +1,24 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
-import 'package:azlistview/azlistview.dart';
-import 'package:breathe/Widgets/apps_list.dart';
+
 import 'package:flutter/material.dart';
 import 'package:installed_apps/app_info.dart';
 import 'package:installed_apps/installed_apps.dart';
 
-class AllApps extends StatefulWidget {
-  const AllApps({Key? key}) : super(key: key);
+import 'package:breathe/Widgets/apps_list.dart';
+
+class AppsScreen extends StatefulWidget {
+  final Object? argument;
+  const AppsScreen({
+    Key? key,
+    this.argument,
+  }) : super(key: key);
 
   @override
-  State<AllApps> createState() => _AllAppsState();
+  State<AppsScreen> createState() => _AppsScreenState();
 }
 
-class _AllAppsState extends State<AllApps> {
+class _AppsScreenState extends State<AppsScreen> {
   List<AppInfo> apps = [];
   @override
   void initState() {
@@ -30,6 +36,9 @@ class _AllAppsState extends State<AllApps> {
         backgroundColor: Colors.black.withOpacity(0.3),
         body: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-            child: const Center(child: AppsList())));
+            child: Center(
+                child: AppsList(
+              homeAppSelection: widget.argument,
+            ))));
   }
 }

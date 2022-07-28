@@ -1,17 +1,23 @@
+import 'package:battery_plus/battery_plus.dart';
+import 'package:breathe/Widgets/battery.dart';
 import 'package:breathe/Widgets/clock_and_calendar_app.dart';
-import 'package:breathe/presentation%20layer/screens/all_apps.dart';
+import 'package:breathe/Widgets/home_screen_apps.dart';
+import 'package:breathe/presentation%20layer/screens/apps_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
+  var appCount = 3;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,10 +26,19 @@ class _HomeState extends State<Home> {
           Navigator.push(
               context,
               PageTransition(
-                  child: const AllApps(),
+                  child: const AppsScreen(),
                   type: PageTransitionType.bottomToTop));
         }
       }),
+      onLongPress: () async {
+        final data = await Navigator.pushNamed(context, '/settings');
+        setState(() {
+          if (data != null) {
+            appCount = data as int;
+            print(appCount);
+          }
+        });
+      },
       child: Scaffold(
         appBar: AppBar(backgroundColor: Colors.transparent),
         backgroundColor: Colors.transparent,
@@ -41,7 +56,10 @@ class _HomeState extends State<Home> {
                 isTimeWidget: false,
                 dateFormat: DateFormat.MMMEd(),
                 timeFormat: DateFormat.jm(),
-              )
+              ),
+              const BatteryInfo(),
+              const SizedBox(height: 180),
+              for (int i = 0; i < appCount; i++) const HomeScreenApps(),
             ],
           ),
         ),

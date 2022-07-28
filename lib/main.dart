@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
         .map((e) => AZList(
             title: e.name.toString(),
             tag: e.name![0].toString().toUpperCase(),
-            abc: e.packageName.toString()))
+            package: e.packageName.toString()))
         .toList();
 
     SuspensionUtil.sortListBySuspensionTag(items);
@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'SFUI'),
-      onGenerateRoute: AppRoutes().generatedRoutes,
+      onGenerateRoute: AppRoutes.generatedRoutes,
     );
   }
 }
