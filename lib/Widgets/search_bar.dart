@@ -4,12 +4,13 @@ class SearchWidget extends StatefulWidget {
   final String text;
   final ValueChanged<String> onChanged;
   final String hintText;
-
-  const SearchWidget({
+  late bool autoShowKeyboard;
+  SearchWidget({
     Key? key,
     required this.text,
     required this.onChanged,
     required this.hintText,
+    required this.autoShowKeyboard,
   }) : super(key: key);
 
   @override
@@ -18,6 +19,23 @@ class SearchWidget extends StatefulWidget {
 
 class _SearchWidgetState extends State<SearchWidget> {
   final controller = TextEditingController();
+  FocusNode focusNode = FocusNode();
+  @override
+  void initState() {
+    if (widget.autoShowKeyboard) {
+      focusNode.requestFocus();
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    if (focusNode.hasFocus) {
+      FocusScope.of(context).unfocus();
+    }
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +52,7 @@ class _SearchWidgetState extends State<SearchWidget> {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextField(
+        focusNode: focusNode,
         controller: controller,
         decoration: InputDecoration(
           icon: const Icon(Icons.search, color: Colors.white70),

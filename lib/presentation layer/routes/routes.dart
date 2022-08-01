@@ -15,7 +15,8 @@ class AppRoutes {
             builder: (context) => AppsScreen(argument: args));
 
       case '/settings':
-        return MaterialPageRoute(builder: (context) => const SettingsScreen());
+        return MaterialPageRoute(
+            builder: (context) => SettingsScreen(argument: args));
 
       default:
         return MaterialPageRoute(builder: (context) => const HomeScreen());

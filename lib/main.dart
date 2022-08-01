@@ -2,21 +2,18 @@ import 'package:azlistview/azlistview.dart';
 import 'package:breathe/Widgets/apps_list.dart';
 import 'package:breathe/presentation%20layer/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:installed_apps/installed_apps.dart';
-import 'package:status_bar_control/status_bar_control.dart';
+import 'package:installed_apps/app_info.dart';
 
-List<AZList> items = [];
+import 'package:installed_apps/installed_apps.dart';
+
+List<AZList> listItems = [];
+
+List<AppInfo> installedItems = [];
+
 bool isLoading = true;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await StatusBarControl.setHidden(true, animation: StatusBarAnimation.SLIDE);
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-    systemNavigationBarColor: Colors.transparent,
-    statusBarColor: Colors.transparent,
-  ));
-
   runApp(const MyApp());
 }
 
@@ -35,16 +32,18 @@ class _MyAppState extends State<MyApp> {
   }
 
   getApps() async {
-    var item = await InstalledApps.getInstalledApps();
-    items = item
+    installedItems = await InstalledApps.getInstalledApps();
+
+    listItems = installedItems
         .map((e) => AZList(
             title: e.name.toString(),
             tag: e.name![0].toString().toUpperCase(),
             package: e.packageName.toString()))
         .toList();
 
-    SuspensionUtil.sortListBySuspensionTag(items);
-    SuspensionUtil.setShowSuspensionStatus(items);
+    SuspensionUtil.sortListBySuspensionTag(listItems);
+    SuspensionUtil.setShowSuspensionStatus(listItems);
+
     setState(() {
       isLoading = false;
     });

@@ -21,9 +21,9 @@ class _HomeScreenAppsState extends State<HomeScreenApps> {
             await Navigator.pushNamed(context, '/appsList', arguments: true);
         setState(() {
           if (data != null) {
-            appName = data.toString().split(',')[0];
-            packageName = data.toString().split(',')[1];
-            print(packageName);
+            var appSelected = data as List<Object>;
+            appName = appSelected[0].toString();
+            packageName = appSelected[1].toString();
           }
         });
       },
@@ -50,9 +50,13 @@ class _HomeScreenAppsState extends State<HomeScreenApps> {
       child: Column(
         children: [
           SizedBox(
-            height: 50,
+            width: 80,
+            height: 60,
             child: Text(appName ?? 'App',
-                style: const TextStyle(fontSize: 32, color: Colors.white)),
+                style: const TextStyle(
+                    fontSize: 32,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w300)),
           ),
         ],
       ),
