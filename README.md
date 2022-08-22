@@ -1,16 +1,32 @@
-# breathe
+# Breathe
 
-A new Flutter project.
+<h4>An Android System Launcher App made using Flutter 3.0.2 </h4>
+<img src="https://github.com/Kartik-Murthy/breathe/blob/main/lib/images/ScreenShots.jpg"/>
 
-## Getting Started
+## Table of Contents
+* [About the Project](#about-the-project)
+* [Dependencies](#dependencies)
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## About the project
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+Breathe is an easy to use system launcher having a classic and minimal layout.
+
+  
+### Dependencies
+
+
+1. [installed_apps: ^1.3.1](https://pub.dev/packages/installed_apps)
+
+2. [intl: ^0.17.0](https://pub.dev/packages/intl)
+
+3. [page_transition: null](https://pub.dev/packages/page_transition)
+
+4. [status_bar_control: null](https://pub.dev/packages/status_bar_controll)
+
+5. [timer_builder: ^2.0.0](https://pub.dev/packages/time_builder)
+
+6. [battery_indicator: ^0.1.1](https://pub.dev/packages/battery_indicator)
+
