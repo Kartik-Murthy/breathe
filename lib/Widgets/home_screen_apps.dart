@@ -50,7 +50,6 @@ class _HomeScreenAppsState extends State<HomeScreenApps> {
       child: Column(
         children: [
           SizedBox(
-            width: 80,
             height: 60,
             child: Text(appName ?? 'App',
                 style: const TextStyle(
