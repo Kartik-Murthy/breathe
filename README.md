@@ -30,3 +30,8 @@ Breathe is an easy to use system launcher having a classic and minimal layout.
 
 6. [battery_indicator: ^0.1.1](https://pub.dev/packages/battery_indicator)
 
+7. [lecle_system_shortcuts: ^0.0.1](https://pub.dev/packages/lecle_system_shortcuts)
+
+
+
+
