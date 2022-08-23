@@ -3,6 +3,7 @@ import 'package:breathe/Widgets/appearance_settings.dart';
 import 'package:breathe/Widgets/gesture_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:installed_apps/installed_apps.dart';
+import 'package:lecle_system_shortcuts/lecle_system_shortcuts.dart';
 
 class SettingsScreen extends StatefulWidget {
   Object? argument;
@@ -15,6 +16,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   Map<Object, Object> settings = {};
   bool tappedOutside = false;
+
   @override
   void initState() {
     settings = widget.argument as Map<Object, Object>;
@@ -27,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     return WillPopScope(
       onWillPop: () async {
         Navigator.pop(context, settings);
+
         return Future.value(true);
       },
       child: GestureDetector(
@@ -80,7 +83,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 height: 30,
                               ),
                               GestureDetector(
-                                onTap: () {
+                                onTap: () async {
+                                  await SystemShortcuts.home();
                                   //Set Default Launcher;
                                 },
                                 child: const Text(
